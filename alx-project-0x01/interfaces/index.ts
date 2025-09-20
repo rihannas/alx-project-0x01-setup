@@ -27,3 +27,10 @@ export interface UserProps {
   website: string;
   company: Company;
 }
+
+export interface PostProps {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
