@@ -2,14 +2,18 @@ import Header from '@/components/layout/Header';
 import UserCard from '@/components/common/UserCard';
 import { UserProps } from '@/interfaces';
 
-const Users: React.FC<{ posts: UserProps[] }> = ({ posts }) => {
+interface UsersPageProps {
+  posts: UserProps[];
+}
+
+const Users: React.FC<UsersPageProps> = ({ posts }) => {
   return (
     <div className='flex flex-col min-h-screen'>
       <Header />
       <main className='p-4'>
         <h1 className='text-2xl font-semibold mb-4'>Users</h1>
         <div className='grid grid-cols-3 gap-4'>
-          {posts?.map((user: UserProps, index: number) => (
+          {posts.map((user: UserProps, index: number) => (
             <UserCard
               key={index}
               {...user}
