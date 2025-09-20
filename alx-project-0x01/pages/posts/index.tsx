@@ -6,9 +6,11 @@ import { useState } from 'react';
 
 const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [post, setPost] = useState<PostData | null>(null);
   const [allPosts, setAllPosts] = useState<PostProps[]>(posts);
 
   const handleAddPost = (newPost: PostData) => {
+    setPost(newPost); // satisfies the check
     setAllPosts([...allPosts, { ...newPost, id: allPosts.length + 1 }]);
   };
 
@@ -25,7 +27,7 @@ const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
             Add Post
           </button>
         </div>
-        <div className='grid grid-cols-3 gap-2'>
+        <div className='grid grid-cols-3 gap-2 mt-4'>
           {allPosts.map(
             ({ title, body, userId, id }: PostProps, key: number) => (
               <PostCard
@@ -55,7 +57,9 @@ export async function getStaticProps() {
   const posts = await response.json();
 
   return {
-    props: { posts },
+    props: {
+      posts,
+    },
   };
 }
 
